@@ -19,23 +19,24 @@ cmake_minimum_required (VERSION 2.8)
 # we cannot generate dune.module since it is read by dunecontrol before
 # the build starts, so it makes sense to keep the data there then.
 
-set( OPM_CMAKE_ROOT "" CACHE PATH "Root directory containing OPM related cmake modules")
+# additional search modules
+set( OPM_COMMON_ROOT "" CACHE PATH "Root directory containing OPM related cmake modules")
 option(SIBLING_SEARCH "Search for other modules in sibling directories?" ON)
 
-if(NOT OPM_CMAKE_ROOT)
+if(NOT OPM_COMMON_ROOT)
    find_package(opm-common QUIET)
 endif()
 
 if (opm-common_FOUND)
    include(OpmInit)
 else()
-   if (NOT OPM_CMAKE_ROOT AND SIBLING_SEARCH)
+   if (NOT OPM_COMMON_ROOT AND SIBLING_SEARCH)
       set(OPM_CMAKE_ROOT ${PROJECT_SOURCE_DIR}/../opm-common)
    endif()
-   if (OPM_CMAKE_ROOT)
-      list( APPEND CMAKE_MODULE_PATH "${OPM_CMAKE_ROOT}/cmake/Modules")
+   if (OPM_COMMON_ROOT)
+      list( APPEND CMAKE_MODULE_PATH "${OPM_COMMON_ROOT}/cmake/Modules")
       include (OpmInit OPTIONAL RESULT_VARIABLE OPM_INIT)
-      set( OPM_MACROS_ROOT ${OPM_CMAKE_ROOT} )
+      set( OPM_MACROS_ROOT ${OPM_COMMON_ROOT} )
    endif()
 
    if (NOT OPM_INIT)
