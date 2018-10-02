@@ -1,0 +1,10 @@
+--- opm-grid-release-2018.04-final/opm/grid/common/p2pcommunicator.hh.orig	2018-10-02 15:24:00.217577915 +0200
++++ opm-grid-release-2018.04-final/opm/grid/common/p2pcommunicator.hh	2018-10-02 15:24:02.109573755 +0200
+@@ -20,6 +20,7 @@
+ #define DUNE_COMMUNICATOR_HEADER_INCLUDED
+ 
+ #include <algorithm>
++#include <cassert>
+ #include <vector>
+ #include <set>
+ #include <map>
